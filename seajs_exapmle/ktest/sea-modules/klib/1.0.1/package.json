@@ -1,0 +1,16 @@
+{ 
+  "name": "main",
+  "version": "1.0.0",
+  "root": "aaa",   
+  "spm": {
+    "alias": {
+      "jquery": "jquery"
+    },
+    "output": ["main.js", "style.css"]
+  },
+  "spmConfig": {
+       "deploy": {
+          "to": "{{root}}/{{name}}/{{version}}"
+      }
+  }
+}
