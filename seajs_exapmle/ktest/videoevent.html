@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>seajs demo0</title>
+		<style type="text/css"></style>		
+	</head>
+	<body>
+		<!--
+			http://main.gslb.ku6.com/s1/AR_ylqSeHJWMZ1Yn/1379744397046/91af07816b303e4fd5043411958e5d7b/1382596253346/v148/49/10/66324c954f7bb7aa4783aefbfd953249-f4v-h264-aac-1094-32-186178.0-26357702-1379744055365-2da84b50e0a4c5d587586d7c15fb5e38-1-00-00-00.f4v?stype=mp4
+		-->
+		<!-- <video autoplay controls="controls" src="">
+			<source src="http://main.gslb.ku6.com/broadcast/sub?channel=910&r=0.20814072480425239&stype=m3u8"></source>
+		</video>
+ -->		
+
+		<script type="text/javascript">
+			var log = function(){
+				if( window.console && window.console.log){
+					console.log(arguments)
+					//window.console.log.apply(window,arguments);
+				}
+			};
+			var HTML5Video = function(parent){
+				var root = parent || document.body;
+				var video = null;
+				var params = {};
+				var that = this;
+				var retryTimeoutId;
+				var retryTimeout = 10000;
+
+				var retryTimes = 0;
+				var retryVideos = [
+					"http://media.w3.org/2010/05/sintel/trailer.mp4",
+					//"http://media.w3.org/2010/05/sintel/trailer.webm",
+					"http://media.w3.org/2010/05/sintel/trailer.ogv"
+				];
+				var contentTypes = [
+					"application/vnd.apple.mpegurl",
+					"video/mp4",
+					"application/octet-stream"
+				];
+				var initialize = function(){
+					video = document.createElement("video");
+					root.appendChild( video );
+					applyParams();
+				}
+				var applyParams = function(){
+					video.setAttribute("width", 400);
+					video.setAttribute("height",300);
+					video.setAttribute("autoplay",true);
+					video.setAttribute("controls",1);
+				}
+				var onEvent = function( arguments ){
+					log("event:", arguments instanceof Event? arguments.type:"" ,arguments);
+					if( arguments.type == "error"){
+						clearTimeout( retryTimeoutId );
+						retryTimeoutId = setTimeout( function(){
+							//that.play("http://main.gslb.ku6.com/broadcast/mob?channel=910&stype=m3u82");	
+							
+							if(retryVideos[retryTimes] ){
+								that.play(retryVideos[retryTimes]);
+								retryTimes++;
+							}
+						}, retryTimeout );
+						
+					}
+				}
+				this.getVideoInstance = function(){
+					return video;
+				}
+				this.play = function( src ){
+					//进入播放状态
+					var testEvent = [	"play",
+										"pause",
+										"waiting",
+										"seeking",
+										"seeked",
+										"durationchange",
+										"loadedmetadata",
+										"loadeddata",
+										"canplay",
+										"playing",
+										"canplaythrough",
+										"ended",
+										"loadstart",
+										//"progress",
+										//"suspend",
+										"abort",
+										"error",
+										"emptied",
+										"stalled",
+										//"timeupdate",
+										"ratechange",
+										"volumechange"];
+					for (var i = 0; i < testEvent.length; i++) {
+						video.addEventListener(testEvent[i], onEvent, false );
+					}
+
+					video.setAttribute("src", src);
+				}
+				initialize();
+			}
+
+			var v = new HTML5Video();
+			v.play("http://main.gslb.ku6.com/s1/AR_ylqSeHJWMZ1Yn/1379744397046/91af07816b303e4fd5043411958e5d7b/1382596253346/v148/49/10/66324c954f7bb7aa4783aefbfd953249-f4v-h264-aac-1094-32-186178.0-26357702-1379744055365-2da84b50e0a4c5d587586d7c15fb5e38-1-00-00-00.f4v?stype=mp4");
+			//v.play("http://10.228.161.13/nodejs/examples-master/static/ktest/assets/test.mp4");
+			v.play("http://10.228.132.15:8070/easyjs/demo/video/getup2.mp4")
+			v.play("http://main.gslb.ku6.com/broadcast/mob?channel=910&stype=m3u8");
+		</script>
+		
+	</body>
+</html>
