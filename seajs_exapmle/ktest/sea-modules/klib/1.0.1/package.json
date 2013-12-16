@@ -6,7 +6,7 @@
     "alias": {
       "jquery": "jquery"
     },
-    "output": ["main.js", "style.css"]
+    "output": ["main.js"]
   },
   "spmConfig": {
        "deploy": {
