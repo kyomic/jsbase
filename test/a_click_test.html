@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>a_click_test</title>
+</head>
+<body>
+	<div id="test">
+		<a href="#">1</a>
+		<a href="#">2</a>
+		<a href="#">3</a>
+		<a href="#">3</a>
+		<a href="#">4</a>
+		<a href="#">5</a>
+		<a href="#">6</a>
+		
+	</div>
+	<script type="text/javascript">
+		(function(){
+			var dom = document.getElementById("test");
+			var list = dom.childNodes;
+			//var links = [];
+			for(var i=0;i<list.length;i++){
+				//console.log(list[i]);
+				if( list[i].nodeType == 1){
+					list[i].onclick = function(i){
+						return function(e){
+							alert(i)
+
+						}
+					}(i)
+					//links.push( list[i ]);
+				}
+			}
+		})();
+	</script>
+</body>
+</html>
