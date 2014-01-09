@@ -5,15 +5,21 @@ define(function(requre, exports,module){
 		//data.uri = Math.random() + "";
 		console.log("onResolve:")
 		console.log(data);
-		var uri = seajs.resolve(data.id, data.refUri);
+
+		console.log("module=")
+		console.log( module)
+		/*var uri = seajs.resolve(data.id, data.refUri);
 		data.uri = uri+"?random=" + Math.random();
+		console.log(seajs.Module)
+		console.log(seajs.Module.get)
 		seajs.Module.get(data.uri);
-		console.log(uri);
+		console.log(uri);*/
 	});
 	seajs.on("request", function(data) {
+		
 	    var name = data.uri;
 	    if (name) {
-	      xhr(data.requestUri+"&rnd="+Math.random(), function(content) {
+	      xhr(data.requestUri, function(content) {
 	       //plugins[name].exec(data.uri, content)
 
 	        data.onRequest()
@@ -22,10 +28,27 @@ define(function(requre, exports,module){
 	      data.requested = true
 	    }
   	})
-	seajs.create = function(){
-		var arr = Array.prototype.slice.call( arguments );
-		return seajs.use.apply( seajs, arr );
-	};
+	seajs.create = function (ids, callback, uri) {
+
+	  var mod = Module.get(uri, isArray(ids) ? ids : [ids])
+
+	  mod.callback = function() {
+	    var exports = []
+	    var uris = mod.resolve()
+
+	    for (var i = 0, len = uris.length; i < len; i++) {
+	      exports[i] = cachedMods[uris[i]].exec()
+	    }
+
+	    if (callback) {
+	      callback.apply(global, exports)
+	    }
+
+	    delete mod.callback
+	  }
+
+	  mod.load()
+	}
 
 	function xhr(url, callback) {
 	    var r = global.ActiveXObject ?

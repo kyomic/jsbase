@@ -1,4 +1,6 @@
 define(function(require) {
+  console.log("################ testSeajsPluginText.");
+ 
 	/*require("seajs-text");
 
   // 获取文本内容
@@ -29,11 +31,11 @@ define(function(require) {
    });
 
 
-   setTimeout( function(){
+  /* setTimeout( function(){
    		var a = seajs.create("./src/Model", function( data){
 	   		console.log("name="+data.userinfo.name);
 	   		data.userinfo.name = "aaa";
 	   		console.log( "after modify:name=" + data.userinfo.name );
 	   });
-   },1000)
+   },1000)*/
 });

@@ -100,8 +100,13 @@ var emit = seajs.emit = function(name, data) {
  */
 
 var DIRNAME_RE = /[^?#]*\//
-
+/*
+  //./   match:/./
+*/
 var DOT_RE = /\/\.\//g
+/*
+    /aaa/a/../  match:/a/../
+*/
 var DOUBLE_DOT_RE = /\/[^/]+\/\.\.\//
 
 // Extract the directory portion of a path
@@ -724,13 +729,15 @@ Module.define = function (id, deps, factory) {
   if (!isArray(deps) && isFunction(factory)) {
     deps = parseDependencies(factory.toString())
   }
-
+  console.log(arguments);
+  console.log("deps",deps, "id",id)
   var meta = {
     id: id,
     uri: Module.resolve(id),
     deps: deps,
     factory: factory
   }
+
 
   // Try to derive uri in IE6-9 for anonymous modules
   if (!meta.uri && doc.attachEvent) {
