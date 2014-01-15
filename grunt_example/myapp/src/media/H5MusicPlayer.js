@@ -4,9 +4,12 @@ define(function(require, exports, module){
 
 	var clsCreator 	= require("../core/class");
 	var VideoEvent 	= require("../event/VideoEvent");
-	var parentClass = require("../media/MediaPlayer");
+	var EventDispatcher = require("../core/EventDispatcher");
+	var IMediaPlayer= require("../interface/IMediaPlayer");
 
-	var player = clsCreator.create("H5MusicPlayer", parentClass );
+	var player = clsCreator.create("H5MusicPlayer", EventDispatcher );
+	player.implements( new IMediaPlayer() );
+
 	var self = null;
 	var options = {
 		url:""
@@ -18,7 +21,7 @@ define(function(require, exports, module){
 	};
 	//------------------------------------------public api------------------------------
 	//重载父类的方法
-	player.override("play", function(){
+	player.prototype.play = function(){
 	   	log.log("H5MusicPlayer.play:", arguments);
 	   	//调用父类的接口
 
@@ -29,11 +32,10 @@ define(function(require, exports, module){
 	   	}else{
 	   		this.audio.play();
 	   	}
-	   	this.super0().play();
-	});
-	player.override("pause", function(){
-	   	this.audio.pause();
-	});
+	};
+	player.prototype.pause =function(){
+		this.audio.pause();
+	};
 
 	player.prototype.getTime = function(){
 		return this.audio.currentTime;

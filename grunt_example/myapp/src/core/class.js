@@ -47,6 +47,15 @@ var Creator = function() {
             //单例,则不执行thisClass的 initialize构造
             //if( typeof thisClass.getInstance != "function"){
             if (this.initialize) this.initialize.apply(this, arguments);
+            if( thisClass.__impl ){
+                for(var i in thisClass.__impl.interface){
+                    var val = thisClass.__impl.interface[i];
+                    if( !this[i] || typeof val!= typeof this[i]){
+                        throw new Error(""+ this.className +"类中未实现接口" + thisClass.__impl.name +"中方法:"+ i);
+                    }
+                }
+                this.impl = thisClass.__impl.listInterfaceName();
+            }
             //}
 
 
@@ -91,7 +100,9 @@ var Creator = function() {
                 }
             }
             ;
-
+            thisClass.implements = function( impl ){
+                thisClass.__impl = impl;
+            };
             /**
              *
              * 注意，重载后，会删除thisClass中的动态创建的属性，将新的属性值写入prototype
@@ -121,6 +132,7 @@ var Creator = function() {
                 }
                 return false;
             };
+            
             thisClass.prototype.superClasses = superClasses;
             thisClass.prototype.className = arg[0];
         }

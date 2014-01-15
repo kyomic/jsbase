@@ -29,6 +29,9 @@ define(function(require, exports, module) {
 		this.stop = function(){
 			Log.log(" mediaplayer.stop:", arguments );
 		}
+
+		this.getVolume = function(){};
+		this.setVolume = function( volume /*0~5间的值*/ ){};
 	};
 	return cls;
 });

@@ -1,10 +1,10 @@
 define(function(require, exports, module) {
-	var Log		= require("./log/Log");
-	var VideoEvent = require("./event/VideoEvent");
-	var Event = require("./event/Event");
+	var Log			= require("./log/Log");
+	var VideoEvent 	= require("./event/VideoEvent");
+	var Event 		= require("./event/Event");
 	var H5MusicPlayer = require("./media/H5MusicPlayer");
 
-	var jQuery = require("jquery");
+	var jQuery 		= require("jquery");
 
 	var media = new H5MusicPlayer();
 
@@ -23,9 +23,28 @@ define(function(require, exports, module) {
 	jQuery("a[data-name='media-control-pause']").click(function(event) {
 		media.pause();
 	});
+
+	Log.log(media)
 	//console.log("media=", media);
 
 	//var uicls = require("./core/KUI");
 	//var ui = new uicls( );
 	
+	/*var db;
+
+	try {
+	    if (window.openDatabase) {
+	        db = openDatabase("NoteTest", "1.0", "HTML5 Database API example", 200000);
+	        if (!db){
+	        	alert("Failed to open the database on disk.  This is probably because the version was bad or there is not enough space left in this domain's quota");
+	        }
+	        else{
+	        	Log.log("create db success!");
+	        }
+	            
+	    } else
+	        alert("Couldn't open the database.  Please try with a WebKit nightly with this feature enabled");
+	} catch(err) { 
+		alert( err );
+	}*/
 });
