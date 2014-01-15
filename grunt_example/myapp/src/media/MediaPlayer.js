@@ -5,29 +5,30 @@ define(function(require, exports, module) {
 
 	var clsCreator 		= require("../core/class");
 	var EventDispatcher = require("../core/EventDispatcher");
-	var log 			= require("../log/log");
+	var Log 			= require("../log/Log");
 
 	var cls = clsCreator.create("MediaPlayer", EventDispatcher );
 	cls.prototype.initialize = function(){
+		var self = this;
 		this.play = function( time /*单位秒*/ ){
-			log.log(" mediaplayer.play:", arguments );
+			Log.log(" mediaplayer.play:", arguments );
 		},
 
 		this.pause = function(){
-			log.log(" mediaplayer.pause:", arguments );
+			Log.log(" mediaplayer.pause:", arguments );
 		},
 
 		this.resume = function(){
-			log.log(" mediaplayer.resume:", arguments );
+			Log.log(" mediaplayer.resume:", arguments );
 		},
 
 		this.seek = function( time /*单位秒*/ ){
-			log.log(" mediaplayer.seek:", arguments );
+			Log.log(" mediaplayer.seek:", arguments );
 		},
 
 		this.stop = function(){
-			log.log(" mediaplayer.stop:", arguments );
+			Log.log(" mediaplayer.stop:", arguments );
 		}
-	}
+	};
 	return cls;
 });

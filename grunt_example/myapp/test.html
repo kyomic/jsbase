@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<title>seajs demo0</title>
+		<meta charset="utf-8">
 		<style type="text/css"></style>		
 	</head>
 	<body>
@@ -18,6 +19,8 @@
 		  seajs.config({
 		    base: base,
 		    alias: {
+		    	//"jquery":"http://localhost/jsbase/grunt_example/myapp/sea-modules/jquery/jquery/1.10.1/jquery.js"
+		    	'jquery': 'jquery/jquery/1.10.1/jquery'
 		    }
 		  });
 
@@ -34,5 +37,13 @@
 		  }
 		</script>
 		<div id="hello-seajs" style="width:100px;height:100px">111</div>
+
+
+		<div class="ui-media-control">
+			<a data-name="media-control-play">播放</a>
+			<a data-name="media-control-pause">暂停</a>
+			<a data-name="media-control-time">00:00</a>
+			<div data-name="media-control-dragbar"></div>
+		</div>
 	</body>
 </html>
