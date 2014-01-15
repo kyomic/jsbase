@@ -1,0 +1,180 @@
+<html>
+	<head>
+		<title>seajs demo0</title>
+		<style type="text/css">
+			.list-container-row{
+				width: 100px;
+				height: 100px;
+				
+				position: relative;
+			}
+			.list-container-row div{
+				position: relative;
+			}
+		</style>		
+	</head>
+	<body>
+		<script src="sea-modules/seajs/seajs/2.1.1/sea.js"></script>
+		<script src="sea-modules/jquery/jquery/1.10.1/jquery-debug.js"></script>
+		<script>
+
+		  // Set configuration
+		  var base = ".";
+		  if (location.href.indexOf("?dev") > 0) {
+		  	base = "./jqexample";
+		  }else{
+		  	base = ".";
+		  }
+
+		  seajs.config({
+		    base: base,
+		    alias: {
+		    	"jquery":"sea-modules/jquery/jquery/1.10.1/jquery"
+		    }
+		  });
+
+		  // For development
+		  if (location.href.indexOf("?dev") > 0) {
+		   // seajs.use("main");
+		  }
+		  // For production
+		  else {
+		  	//seajs.use("jqexample/main");
+		    
+		    
+
+		  }
+		  var $ = jQuery;
+		  $(document).ready(function(){
+		  	$("p").on('click',  function(event) {
+		  		console.log(1);
+		  		console.log($(this).val());
+		  	});
+
+		  	$("p").on('click', function(event) {
+		  		console.log(2)
+		  		/* Act on the event */
+		  	});
+
+		  	/*window.jQuery19104614588350523263_1389251488211 = function( obj ){
+		  		console.log(obj);
+		  	}
+		  	$.getScript('http://recv.ku6.com/recvideo2.htm?recty=304&vid=XftqZhJT692cXOVUD9MfRA..,O7HKLH0v0m0vRlQfXTkt7g..,XiXGai9yKQLJF_dLVtVLdA..,4hFItpyx4VdmwD_m_7T_zQ..,Ht0b6J7zyXjmra4CIaEYhA..,Fa_tQ8SAxAid89dARrOOAg..,CpOu1p_HmSimmcvondcNvQ..,JpqvqKC47ikvz_s9cJbgMQ..,xOy2P8h0Jeul7mRM,02oc5IJTx_MQoPIhF9A80Q..&cid=egshF1K7w3kVJy5qca2RAg==&cb=jQuery19104614588350523263_1389251488211&_=1389251488212',
+		  		
+		  		function(data) {
+		  			console.log("onScript:")
+		  			console.log(data);
+		  		},
+		  		"script"
+		  	);*/
+
+		  	$(document).ajaxComplete(function(event, xhr, settings) {
+		  		//console.log(arguments);
+		  		//console.log( xhr.responseHTML);
+		  	});
+		  	$(document).load("empty.html", function(){
+		  		//console.log("????");
+		  	});
+
+		  	$(document).load("empty.html");
+
+		 	//$("p#t1").show("10");
+
+		});
+		  
+		</script>
+		<p>11111111111</p>
+		<p>22222222222</p>
+		<select>
+			<option value="a">a</option>
+			<option value="b">b</option>
+		</select>
+
+		<p id="t1" style="display:none;">ddddddddddddddd</p>
+
+		<div class="p1"><button name="aa" value="AAAAAA">Click Me!</div>
+
+
+		<p>I would like to say: </p><div id="foo">aaaaaaaaaaaaaaa</div>
+
+		<div data-module="m-pageview" style="padding-left:200px">
+			<div data-module="m-pageview-prev">prev</div>
+			<div data-module="m-pageview-container" class="list-container-row">
+				<div><img alt="1" src="" width="100" height="20" /></div>
+				<div><img alt="2" src="" width="100" height="20" /></div>
+				<div><img alt="3" src="" width="100" height="20" /></div>
+			</div>
+			<div data-module="m-pageview-next">next</div>
+		</div>
+		<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			//$("div[data-module='m-pageview']")
+			var itemWidth, 
+				itemHeight,
+				items,
+				itemCount;
+			var controlNext, controlPrev;
+
+			// 当前页
+			var currentPage = 0;
+			var nextPage  = function(){
+				if( currentPage < itemCount ){
+					currentPage += 1;
+					setPage( currentPage );
+				}
+				autofix( true );
+			};
+			var prevPage = function(){
+
+			};
+			var setPage = function( page ){
+
+			};
+			var autofix = function( end ){
+				if( end ){
+					var clone;
+					for(var i=0;i<itemCount;i++){
+						clone = $.clone( items[i]);
+						$(clone).css({
+							left:(itemCount + i) * 100
+						})
+						console.log(clone)
+						$(container).append( clone );
+					}
+				}
+			};
+
+			controlNext = $("div[data-module='m-pageview-next']");
+			controlPrev = $("div[data-module='m-pageview-prev']");
+
+			controlPrev.on('click', function(event) {
+				event.preventDefault();
+				prevPage();
+			});
+			controlNext.on('click', function(event) {
+				event.preventDefault();
+				nextPage();
+			});
+			var container = $("div[data-module='m-pageview']").children("div[data-module='m-pageview-container']");
+			//$(container.children()).hide();
+			items = container.children();
+			itemCount = container.children().length;
+			if( itemCount >0 ){
+				var child0 = container.children()[0];
+				if( child0 ){
+					itemWidth = $(child0).width();
+					itemHeight = $(child0).height();
+				}
+				$.each( items, function(index, val) {
+					console.log($(val));
+					$( val ).css({
+						left:100*index,top:0,position:"absolute"
+					});
+				});
+			}else{
+
+			}			
+		});
+		</script>
+	</body>
+</html>

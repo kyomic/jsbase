@@ -1,0 +1,6 @@
+<div>
+	<a data-name="media-control-play" />
+	<a data-name="media-control-pause" />
+	<a data-name="media-control-time" />
+	<div data-name="media-control-dragbar"></div>
+</div>
