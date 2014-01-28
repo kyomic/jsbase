@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<title>seajs demo0</title>
+		<meta charset="utf-8">
+		<style type="text/css">
+		</style>		
+		<script src="lib_th/dsp.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			window.jsplayer = {
+				playReady:function(){
+					console.log("ready.");
+					var player = document.getElementById("ku6player");
+					player.addPlayerEvent("video_play", "onVideoPlay");
+					console.log("ok");
+				},
+				onVideoPlay:function(){
+					console.log("play");
+					var player = document.getElementById("ku6player");
+					player.pauseVideo();
+				}
+			}
+		</script>
+		<script languange="text/javascript" src="out.js" data-id="ku6player"  data-player="http://player.ku6.com/inside/Z_Om9pH_i42HZwBYn7527Q../v.swf"  data-params="pid=910&adss=1&fu=1&auto=1&logo=#&list=1&jump=1&callbackContext=jsplayer&callbackInit=playReady&playerVersion=201401151122" data-width="400" data-height="300"  data-wmode="transparent"></script>
+
+	</body>
+</html>

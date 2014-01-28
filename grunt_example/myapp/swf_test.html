@@ -1,0 +1,46 @@
+<html>
+	<head>
+		<title>seajs demo0</title>
+		<meta charset="utf-8">
+		<style type="text/css">
+			#fft{
+				background:#000000;
+			}		
+		</style>		
+		<script src="lib_th/dsp.js"></script>
+	</head>
+	<body>
+		<script src="sea-modules/seajs/seajs/2.1.1/sea.js"></script>
+		<script>
+
+		  // Set configuration
+		  var base = ".";
+		  if (location.href.indexOf("?dev") > 0) {
+		  	base = "./src";
+		  }else{
+		  	base = "./dest";
+		  }
+
+		  seajs.config({
+		    base: base,
+		    alias: {
+		    	//"jquery":"http://localhost/jsbase/grunt_example/myapp/sea-modules/jquery/jquery/1.10.1/jquery.js"
+		    	'jquery': 'jquery/jquery/1.10.1/jquery'
+		    }
+		  });
+
+		  // For development
+		  if (location.href.indexOf("?dev") > 0) {
+		    seajs.use("TestSWFMain");
+		  }
+		  // For production
+		  else {
+		  	seajs.use("TestSWFMain");
+		    
+		    //seajs.use("examples/hello/1.0.0/main");
+
+		  }
+		</script>
+		
+	</body>
+</html>
