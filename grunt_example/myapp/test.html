@@ -2,7 +2,12 @@
 	<head>
 		<title>seajs demo0</title>
 		<meta charset="utf-8">
-		<style type="text/css"></style>		
+		<style type="text/css">
+			#fft{
+				background:#000000;
+			}		
+		</style>		
+		<script src="lib_th/dsp.js"></script>
 	</head>
 	<body>
 		<script src="sea-modules/seajs/seajs/2.1.1/sea.js"></script>
@@ -45,5 +50,7 @@
 			<a data-name="media-control-time">00:00</a>
 			<div data-name="media-control-dragbar"></div>
 		</div>
+
+		<canvas id="fft" width="500" height="400"></canvas>
 	</body>
 </html>

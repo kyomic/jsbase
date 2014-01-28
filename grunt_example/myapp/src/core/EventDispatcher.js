@@ -1,4 +1,5 @@
 define(function(require, exports, module) {
+	var Event = require("../event/Event");
 	var dispatcher = function(){
 		var cache = {};
 		this.addEventListener = function(type,fun)

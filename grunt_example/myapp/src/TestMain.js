@@ -9,22 +9,53 @@ define(function(require, exports, module) {
 	var media = new H5MusicPlayer();
 
 	Log.log("addEvent................");
-	media.addEventListener( VideoEvent.VIDEO_PLAY, function(evt){
-		Log.log(evt);
+
+	var formatTime = function( n ){
+
+	}
+	var onVideoEvent = function( evt ){
+		switch( evt.type ){
+			case VideoEvent.VIDEO_TIME_UPDATE:
+				jQuery("a[data-name='media-control-time']").text( evt.data );
+				break;
+		}
+	};
+
+	jQuery.each(
+		[
+		VideoEvent.VIDEO_PLAY,
+		VideoEvent.VIDEO_TIME_UPDATE
+		], 
+		function(index, val) {
+			media.addEventListener( val, onVideoEvent);
 	});
-	media.addEventListener( VideoEvent.VIDEO_TIME_UPDATE, function(evt){
-		jQuery("a[data-name='media-control-time']").text( evt.data )
+	
+	jQuery.each(["play", "pause"], function(index, val) {
+		var domName = "media-control-" + val;
+		jQuery("a[data-name='" + domName + "']").click(function(event) {
+			switch( val ){
+				case "play":
+					media.play();
+					break;
+				case "pause":
+					media.pause();
+					break;
+			}	
+		});
 	});
+
 	media.play("http://freshly-ground.com/data/audio/sm2/water-drop.mp3");
 
-	jQuery("a[data-name='media-control-play']").click(function(event) {
-		media.play();
-	});
-	jQuery("a[data-name='media-control-pause']").click(function(event) {
-		media.pause();
-	});
+	
 
 	Log.log(media)
+
+
+	//var loadex = require("./LoadMp3Example");
+	//loadex.init2();
+
+
+
 	//console.log("media=", media);
 
 	//var uicls = require("./core/KUI");

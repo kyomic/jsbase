@@ -1,4 +1,5 @@
 define(function(require, exports, module) {
+    var LangFix = require("./LangFix");
 /**
  * Class创建器，支持多继承。只有第一父类采用 prototype继承，后续父类采用属性拷贝的方式。（可以参见create函数）
  *
@@ -51,7 +52,7 @@ var Creator = function() {
                 for(var i in thisClass.__impl.interface){
                     var val = thisClass.__impl.interface[i];
                     if( !this[i] || typeof val!= typeof this[i]){
-                        throw new Error(""+ this.className +"类中未实现接口" + thisClass.__impl.name +"中方法:"+ i);
+                        throw new Error(""+ this.className +"类未实现接口" + thisClass.__impl.name +"中方法:"+ i);
                     }
                 }
                 this.impl = thisClass.__impl.listInterfaceName();
@@ -140,6 +141,7 @@ var Creator = function() {
     }
     return arguments.callee;
 }();
+
 
 return Creator;
 

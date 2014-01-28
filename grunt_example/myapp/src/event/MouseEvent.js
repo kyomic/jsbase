@@ -1,7 +1,7 @@
 define( function( require, module, exports ){
-	var clsCreator 		= require("../core/class");
-	var cls = clsCreator.create("MouseEvent");
-	cls.prototype.initialize = function( type, data , x, y){
+	var Creator 		= require("../core/class");
+	var MouseEvent = Creator.create("MouseEvent");
+	MouseEvent.prototype.initialize = function( type, data , x, y){
 		this.type = type;
 		this.data = data;
 		this.x = (typeof x=="undefined" || !x || isNaN(Number(x)) ) ? 0: x;
@@ -10,4 +10,5 @@ define( function( require, module, exports ){
 			return "[MouseEvent type='" + this.type + "' data='" + this.data + "' target='" + this.target + "' x="+ this.x +" y="+this.y+" ]";
 		};
 	};
+	return MouseEvent;
 });

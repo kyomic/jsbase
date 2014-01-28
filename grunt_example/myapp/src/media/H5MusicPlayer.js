@@ -6,6 +6,7 @@ define(function(require, exports, module){
 	var VideoEvent 	= require("../event/VideoEvent");
 	var EventDispatcher = require("../core/EventDispatcher");
 	var IMediaPlayer= require("../interface/IMediaPlayer");
+	var MediaPlayState	= require("../static/MediaPlayState");
 
 	var player = clsCreator.create("H5MusicPlayer", EventDispatcher );
 	player.implements( new IMediaPlayer() );
@@ -20,11 +21,12 @@ define(function(require, exports, module){
 		return options;
 	};
 	//------------------------------------------public api------------------------------
-	//重载父类的方法
+	player.prototype.preload = function(){
+		//TODO
+	};
 	player.prototype.play = function(){
 	   	log.log("H5MusicPlayer.play:", arguments);
 	   	//调用父类的接口
-
 	   	var arg0 = arguments[0];
 	   	if( typeof arg0 == "string" ){
 	   		this.audio.setAttribute("src", arg0);
@@ -33,16 +35,45 @@ define(function(require, exports, module){
 	   		this.audio.play();
 	   	}
 	};
+	player.prototype.seek = function( time ){
+		//TODO
+	};
 	player.prototype.pause =function(){
 		this.audio.pause();
 	};
+	player.prototype.resume = function(){
 
+	};
+
+	player.prototype.stop = function(){
+		//TODO
+	};
+	player.prototype.state = MediaPlayState.PENDING;
+	player.prototype.mute = function(){
+
+	};
+	player.prototype.isMuted = function(){
+		return false;
+	};
+	player.prototype.setVolume = function( vol ){
+
+	};
+	player.prototype.getVolume = function(){
+
+	};
 	player.prototype.getTime = function(){
 		return this.audio.currentTime;
 	};
 	player.prototype.getDuration = function(){
 		return this.audio.duration;
 	};
+	player.prototype.getBytesLoaded = function(){
+		return 0;
+	};
+	player.prototype.getBytesTotal = function(){
+
+	};
+	player.prototype.getLoadPercent = function(){};
 
 	//------------------------------------------public api------------------------------
 	player.prototype.initialize = function( parent , opt ){
@@ -88,6 +119,8 @@ define(function(require, exports, module){
 		self.audio.addEventListener("ratechange", onAudioEvent, false );//播放速率改变 
 		self.audio.addEventListener("durationchange", onAudioEvent, false );//资源长度改变 
 		self.audio.addEventListener("volumechange", onAudioEvent, false );	//音量改变 
+
+		self.audio.addEventListener("audiowritten", onAudioEvent, false);
 		self.audio.addEventListener("", onAudioEvent, false );
 	};
 	return player;
